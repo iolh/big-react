@@ -1,8 +1,8 @@
 {
-	"name": "react",
+	"name": "react-reconciler",
 	"version": "1.0.0",
-	"description": "react开放给开发者的API",
-	"module": "index.ts",
+	"description": "",
+	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
