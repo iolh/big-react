@@ -1,4 +1,4 @@
-import { beginwork } from './beginWork';
+import { beginWork } from './beginWork';
 import { commitMutationEffects } from './commitWork';
 import { completeWork } from './completeWork';
 import { FiberNode, FiberRootNode, createWorkInProgess } from './fiber';
@@ -69,7 +69,7 @@ function workLoop() {
 }
 
 function performUnitOfWork(fiber: FiberNode) {
-	const next = beginwork(fiber);
+	const next = beginWork(fiber);
 	fiber.memoizedProps = fiber.pendingProps;
 	if (next === null) {
 		completeUnitOfWork(fiber);

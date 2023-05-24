@@ -1,1 +1,5 @@
-export const REACT_ELEMENT_TYPE: symbol = Symbol.for('react.element');
+const supportsSymbol = typeof Symbol === 'function' && Symbol.for;
+
+export const REACT_ELEMENT_TYPE = supportsSymbol
+	? Symbol.for('react.element')
+	: 0xeac7;

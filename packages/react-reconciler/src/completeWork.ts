@@ -5,7 +5,12 @@ import {
 	createTextInstance
 } from 'hostConfig';
 import { FiberNode } from './fiber';
-import { HostComponent, HostRoot, HostText } from './workTags';
+import {
+	FunctionComponent,
+	HostComponent,
+	HostRoot,
+	HostText
+} from './workTags';
 import { NoFlags } from './fiberFlags';
 
 export function completeWork(wip: FiberNode) {
@@ -23,7 +28,7 @@ export function completeWork(wip: FiberNode) {
 				appendAllChildren(instance, wip);
 				wip.stateNode = instance;
 			}
-			bublePropertites(wip);
+			bubbleProperties(wip);
 			return null;
 		case HostText:
 			if (current !== null) {
@@ -33,10 +38,11 @@ export function completeWork(wip: FiberNode) {
 				const instance = createTextInstance(newProps.content);
 				wip.stateNode = instance;
 			}
-			bublePropertites(wip);
+			bubbleProperties(wip);
 			return null;
 		case HostRoot:
-			bublePropertites(wip);
+		case FunctionComponent:
+			bubbleProperties(wip);
 			return null;
 
 		default:
@@ -75,7 +81,7 @@ function appendAllChildren(parent: Container, wip: FiberNode) {
 	}
 }
 
-function bublePropertites(wip: FiberNode) {
+function bubbleProperties(wip: FiberNode) {
 	let subtreeFlags = NoFlags;
 	let child = wip.child;
 	while (child !== null) {

@@ -1,5 +1,6 @@
 {
 	"compileOnSave": true,
+	"include": ["./packages/**/*"],
 	"compilerOptions": {
 		"target": "ESNext",
 		"useDefineForClassFields": true,
@@ -17,6 +18,7 @@
 		"noImplicitReturns": false,
 		"skipLibCheck": true,
 		"baseUrl": "./packages",
+		"jsx": "react-jsx",
 		"paths": {
 			"hostConfig": ["./react-dom/src/hostConfig.ts"]
 		}

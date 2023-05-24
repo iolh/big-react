@@ -82,6 +82,14 @@ export function createElement(
 	return ReactElement(type, key, ref, props);
 }
 
+export function isValidElement(object: any) {
+	return (
+		typeof object === 'object' &&
+		object !== null &&
+		object.$$typeof === REACT_ELEMENT_TYPE
+	);
+}
+
 export function jsx(type: ElementType, config: any, maybeKey: any) {
 	let propName;
 
@@ -101,8 +109,8 @@ export function jsx(type: ElementType, config: any, maybeKey: any) {
 		key = '' + maybeKey;
 	}
 
-	ref = config.ref !== undefined ? config.ref : ref;
-	key = config.key !== undefined ? '' + config.key : key;
+	ref = config?.ref !== undefined ? config.ref : ref;
+	key = config?.key !== undefined ? '' + config.key : key;
 
 	// Remaining properties are added to a new props object
 	for (propName in config) {
