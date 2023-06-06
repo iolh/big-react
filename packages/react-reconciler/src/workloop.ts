@@ -1,14 +1,14 @@
 import { beginWork } from './beginWork';
 import { commitMutationEffects } from './commitWork';
 import { completeWork } from './completeWork';
-import { FiberNode, FiberRootNode, createWorkInProgess } from './fiber';
+import { FiberNode, FiberRootNode, createWorkInProgress } from './fiber';
 import { MutationMask, NoFlags } from './fiberFlags';
 import { HostRoot } from './workTags';
 
 let workInProgress: FiberNode | null = null;
 
 function prepareFreshStack(root: FiberRootNode) {
-	workInProgress = createWorkInProgess(root.current, {});
+	workInProgress = createWorkInProgress(root.current, {});
 }
 
 function renderRoot(root: FiberRootNode) {

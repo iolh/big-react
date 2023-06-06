@@ -5,12 +5,12 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch via NPM",
+			"name": "Launch Chrome",
 			"request": "launch",
-			"runtimeArgs": ["run-script", "test"],
-			"runtimeExecutable": "npm",
-			"skipFiles": ["<node_internals>/**"],
-			"type": "node"
+			"type": "chrome",
+			"url": "http://localhost:5173",
+			"webRoot": "${workspaceFolder}"
 		}
+
 	]
 }

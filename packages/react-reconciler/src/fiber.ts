@@ -17,6 +17,7 @@ export class FiberNode {
 	public subtreeFlags: Flags;
 	public updateQueue: unknown;
 	public memoizedState: any;
+	public deletions: FiberNode[] | null;
 
 	constructor(
 		public tag: WorkTag,
@@ -43,6 +44,7 @@ export class FiberNode {
 		this.memoizedState = null;
 		this.flags = NoFlags;
 		this.subtreeFlags = NoFlags;
+		this.deletions = null;
 	}
 }
 
@@ -58,7 +60,7 @@ export class FiberRootNode {
 	}
 }
 
-export function createWorkInProgess(current: FiberNode, pendingProps: Props) {
+export function createWorkInProgress(current: FiberNode, pendingProps: Props) {
 	let wip = current.alternate;
 	if (wip === null) {
 		// mount
@@ -70,6 +72,7 @@ export function createWorkInProgess(current: FiberNode, pendingProps: Props) {
 		// update
 		wip.pendingProps = pendingProps;
 		wip.flags = NoFlags;
+		wip.deletions = null;
 	}
 
 	wip.type = current.type;

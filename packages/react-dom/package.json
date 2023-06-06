@@ -1,7 +1,7 @@
 {
 	"name": "react-dom",
 	"version": "1.0.0",
-	"description": "",
+	"description": "浏览器专属React渲染器",
 	"module": "index.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
