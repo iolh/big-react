@@ -1,6 +1,6 @@
 import { ReactElementType } from 'shared/ReactType';
 import { FiberNode, createFiberFromElement } from './fiber';
-import { REACT_ELEMENT_TYPE } from 'shared/ReactSymbols';
+import { REACT_ELEMENT_TYPE, REACT_FRAGMENT_TYPE } from 'shared/ReactSymbols';
 import { HostText } from './workTags';
 import { ChildDeletion, Placement } from './fiberFlags';
 import { createWorkInProgress } from './fiber';
@@ -218,8 +218,18 @@ function ChildReconciler(shouldTrackEffects: boolean) {
 	return function reconcileChildFibers(
 		returnFiber: FiberNode,
 		currentFiber: FiberNode | null,
-		newChild?: ReactElementType
+		newChild?: any
 	) {
+		// 判断Fragment
+		const isUnKeyedTopLevelFragment =
+			typeof newChild === 'object' &&
+			newChild !== null &&
+			newChild.type === REACT_FRAGMENT_TYPE &&
+			newChild.key === null;
+		if (isUnKeyedTopLevelFragment) {
+			newChild = newChild.props.children;
+		}
+
 		if (typeof newChild === 'object' && newChild !== null) {
 			switch (newChild.$$typeof) {
 				case REACT_ELEMENT_TYPE:
@@ -245,7 +255,7 @@ function ChildReconciler(shouldTrackEffects: boolean) {
 			);
 		}
 
-		currentFiber && deleteChild(returnFiber, currentFiber);
+		currentFiber && deleteRemainingChildren(returnFiber, currentFiber);
 
 		return null;
 	};

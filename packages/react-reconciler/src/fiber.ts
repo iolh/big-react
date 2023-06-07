@@ -26,7 +26,7 @@ export class FiberNode {
 	) {
 		// 实例
 		this.tag = tag;
-		this.key = key;
+		this.key = key || null;
 		this.stateNode = null;
 		this.type = null;
 
